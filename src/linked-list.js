@@ -41,14 +41,37 @@ class LinkedList {
     }
 
     at(index) {
-      let currentNode = this._head;
-      for (let i = 0; i < index; i++) {
-        currentNode = currentNode.next;
+      if (this.length === 0 || index < 0 || index > this.length) {
+        throw new Error(message.failure);
       }
-      return currentNode.data;
+      else {
+        let currentNode = this._head;
+        for (let i = 0; i < index; i++) {
+          currentNode = currentNode.next;
+        }
+        return currentNode.data;
+      }
     }
 
-    insertAt(index, data) {}
+    insertAt(index, data) {
+      if (this.length === 0 || index < 0 || index > this.length) {
+        throw new Error(message.failure);
+      }
+      else {
+        const node = new Node(data);
+        let currentNode = this._head;
+        for (let i = 0; i < index; i++) {
+          currentNode = currentNode.next;
+        }
+        let currentNextNode = currentNode.next;
+        currentNode.next = node;
+        node.prev = currentNode;
+        node.next = currentNextNode;
+        currentNextNode.prev = node;
+      }
+      this.length++;
+      return this;
+    }
 
     isEmpty() {}
 
