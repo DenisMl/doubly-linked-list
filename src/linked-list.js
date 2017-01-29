@@ -74,7 +74,10 @@ class LinkedList {
       return this;
     }
 
-    isEmpty() {}
+    isEmpty() {
+      if (!this.length) return true;
+      return false;
+    }
 
     clear() {}
 
