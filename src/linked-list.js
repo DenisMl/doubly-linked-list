@@ -79,7 +79,23 @@ class LinkedList {
       return false;
     }
 
-    clear() {}
+    clear() {
+      let currentNode = this._head;
+      let currentNextNode = currentNode.next;
+      for (let i = 0; i < this.length; i++) {
+          currentNode.data = null;
+          if (currentNode.next) {
+            currentNode.next = null;
+          }
+          currentNode.prev = null;
+          currentNode = currentNextNode;
+          if (currentNextNode.next) {
+            currentNextNode = currentNextNode.next;
+          }          
+      }
+      this.length = 0;
+      return this;
+    }
 
     deleteAt(index) {}
 
