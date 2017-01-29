@@ -63,11 +63,12 @@ class LinkedList {
         for (let i = 0; i < index; i++) {
           currentNode = currentNode.next;
         }
-        let currentNextNode = currentNode.next;
-        currentNode.next = node;
-        node.prev = currentNode;
-        node.next = currentNextNode;
-        currentNextNode.prev = node;
+        let currentPrevNode = currentNode.prev;
+        node.next = currentNode;
+        currentNode.prev = node;
+        currentPrevNode.next = node;
+        node.prev = currentPrevNode;
+
       }
       this.length++;
       return this;
