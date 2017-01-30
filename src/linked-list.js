@@ -91,13 +91,43 @@ class LinkedList {
           currentNode = currentNextNode;
           if (currentNextNode.next) {
             currentNextNode = currentNextNode.next;
-          }          
+          }
       }
       this.length = 0;
       return this;
     }
 
-    deleteAt(index) {}
+    deleteAt(index) {
+      if (this.length === 0 || index < 0 || index > this.length) {
+        throw new Error(message.failure);
+      }
+      else {
+        let currentNode = this._head;
+        for (let i = 0; i < index; i++) {
+          currentNode = currentNode.next;
+        }
+
+        if (currentNode.next) {
+          if (currentNode.prev) {
+            currentNode.next.prev = currentNode.prev;
+            currentNode.prev.next = currentNode.next;
+            currentNode.next = null;
+            currentNode.prev = null;
+          }
+          else if (currentNode.next) {
+            currentNode.next.prev = null;
+            currentNode.next = null;
+          }
+          else if (currentNode.prev) {
+            currentNode.prev.next = null;
+            currentNode.prev = null;
+          }
+          currentNode.data = null;
+        }
+      this.length--;
+      return this;
+    }
+  }
 
     reverse() {}
 
