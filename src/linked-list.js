@@ -42,7 +42,7 @@ class LinkedList {
 
     at(index) {
       if (this.length === 0 || index < 0 || index > this.length) {
-        throw new Error(message.failure);
+        return this;
       }
       else {
         let currentNode = this._head;
@@ -55,7 +55,8 @@ class LinkedList {
 
     insertAt(index, data) {
       if (this.length === 0 || index < 0 || index > this.length) {
-        throw new Error(message.failure);
+        return this;
+
       }
       else {
         const node = new Node(data);
@@ -99,7 +100,7 @@ class LinkedList {
 
     deleteAt(index) {
       if (this.length === 0 || index < 0 || index > this.length) {
-        throw new Error(message.failure);
+        return this;
       }
       else {
         let currentNode = this._head;
@@ -129,9 +130,32 @@ class LinkedList {
     }
   }
 
-    reverse() {}
+    reverse() {
+      let currentNode = this._head;
+      let nextNode = null;
+      let head = this._head;
+      for (let i = 0; i < this.length; i++) {
+        currentNode.prev = currentNode.next;
+          currentNode.next = nextNode;
+          nextNode = currentNode;
+          currentNode = currentNode.prev;
+      }
+      let index = this.length - 1;
+      this._head = this._tail;
+      this._tail = head;
+      return this;
+    }
 
-    indexOf(data) {}
+    indexOf(data) {
+      let currentNode = this._head;
+      for (var i = 0; i < this.length; i++) {
+        if (currentNode.data === data) {
+          return i;
+        }
+        currentNode = currentNode.next;
+      }
+      return -1;
+    }
 }
 
 module.exports = LinkedList;
